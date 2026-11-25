@@ -132,7 +132,7 @@
     E.tema = null; E.recientes = []; E.enPartida = true;
     $('#juego-estrellas').textContent = '0';
     dibujarVidas();
-    ['capa-festejo', 'capa-pausa', 'capa-fin'].forEach(function (c) { capa(c, false); });
+    ['capa-festejo', 'capa-fin'].forEach(function (c) { capa(c, false); });
     mostrarPantalla('pantalla-juego');
     empezarNivel();
   }
@@ -466,7 +466,7 @@
     limpiarTimers();
     if (E.enPartida) registrarRecord();
     E.enPartida = false;
-    ['capa-festejo', 'capa-pausa', 'capa-fin'].forEach(function (c) { capa(c, false); });
+    ['capa-festejo', 'capa-fin'].forEach(function (c) { capa(c, false); });
     $('#inicio-record').textContent = leerRecord();
     mostrarPantalla('pantalla-inicio');
   }
@@ -484,10 +484,6 @@
     Sonidos.desbloquear();
     switch (b.dataset.accion) {
       case 'jugar': Sonidos.toque(); nuevaPartida(); break;
-      case 'pausa':
-        if (!E.enPartida) return;
-        Sonidos.toque(); capa('capa-pausa', true); break;
-      case 'seguir': Sonidos.toque(); capa('capa-pausa', false); break;
       case 'otra-vez':
         Sonidos.toque();
         if (E.enPartida) registrarRecord();

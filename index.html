@@ -50,7 +50,9 @@
         <span id="juego-estrellas">0</span>
       </div>
       <h1 class="titulo-burbuja chico"><span class="linea">PAREJAS</span><span class="linea">QUE LEEN</span></h1>
-      <button class="btn-pausa" data-accion="pausa" aria-label="Pausa"><span></span><span></span></button>
+      <button class="btn-pausa btn-inicio-juego" data-accion="inicio" aria-label="Inicio">
+        <svg viewBox="0 0 64 64"><use href="#svg-casa"/></svg>
+      </button>
     </header>
 
     <div class="estado">
@@ -87,17 +89,6 @@
           <svg viewBox="0 0 64 64" class="flecha"><use href="#svg-flecha"/></svg>
         </button>
       </div>
-    </div>
-  </div>
-
-  <!-- ================= PAUSA ================= -->
-  <div id="capa-pausa" class="capa">
-    <div class="panel-madera">
-      <h2 class="titulo-burbuja"><span class="linea">PAUSA</span></h2>
-      <button class="btn-verde btn-ancho" data-accion="seguir">SEGUIR</button>
-      <button class="btn-celeste btn-ancho" data-accion="otra-vez">OTRA VEZ</button>
-      <button class="btn-naranja btn-ancho" data-accion="inicio">INICIO</button>
-      <button class="btn-redondo btn-sonido en-panel" data-accion="sonido" aria-label="Sonido">🔊</button>
     </div>
   </div>
 

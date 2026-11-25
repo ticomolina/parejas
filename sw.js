@@ -1,7 +1,7 @@
 /* Service worker: guarda todo para que funcione sin internet.
    Cada vez que cambies algún archivo (por ejemplo datos/palabras.js),
    subí este número de versión para que las tablets se actualicen. */
-var VERSION = 'pql-v2';
+var VERSION = 'pql-v3';
 
 var ARCHIVOS = [
   './',

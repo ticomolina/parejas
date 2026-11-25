@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Parejas que leen</title>
+  <meta name="theme-color" content="#8fd3ff">
+  <meta name="description" content="Juego de parejas para aprender a leer">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Parejas">
+  <link rel="preload" href="fonts/fredoka-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ================= INICIO ================= -->
+  <section id="pantalla-inicio" class="pantalla activa">
+    <div class="cielo">
+      <div class="nube n1"></div><div class="nube n2"></div><div class="nube n3"></div>
+    </div>
+    <div class="colina"></div>
+    <div class="flores" aria-hidden="true"><span>🌼</span><span>🌼</span><span>🌼</span><span>🌼</span></div>
+
+    <button class="btn-redondo btn-sonido" data-accion="sonido" aria-label="Sonido">🔊</button>
+
+    <div class="inicio-contenido">
+      <h1 class="titulo-burbuja grande"><span class="linea">PAREJAS</span><span class="linea">QUE LEEN</span></h1>
+
+      <div class="inicio-cartas" aria-hidden="true">
+        <div class="carta-deco durazno"><span class="emoji">🐶</span></div>
+        <span class="corazoncito">💖</span>
+        <div class="carta-deco celeste"><span class="palabra-deco">PERRO</span></div>
+      </div>
+
+      <div class="pildora-record"><span class="trofeo">🏆</span> RÉCORD <span id="inicio-record">0</span></div>
+
+      <button class="btn-verde btn-jugar" data-accion="jugar">JUGAR</button>
+    </div>
+  </section>
+
+  <!-- ================= JUEGO ================= -->
+  <section id="pantalla-juego" class="pantalla">
+    <header class="cabecera">
+      <div class="estrella-badge" aria-label="Estrellas">
+        <svg viewBox="0 0 100 100" class="estrella-svg"><use href="#svg-estrella"/></svg>
+        <span id="juego-estrellas">0</span>
+      </div>
+      <h1 class="titulo-burbuja chico"><span class="linea">PAREJAS</span><span class="linea">QUE LEEN</span></h1>
+      <button class="btn-pausa" data-accion="pausa" aria-label="Pausa"><span></span><span></span></button>
+    </header>
+
+    <div class="estado">
+      <div class="pildora-crema" id="contador">0 DE 3</div>
+      <div class="pildora-crema vidas" id="vidas"></div>
+    </div>
+
+    <main class="tablero-zona" id="tablero-zona">
+      <div class="tablero" id="tablero"></div>
+    </main>
+
+    <footer class="pie-nivel">
+      <div class="selector-nivel">
+        <button class="btn-nivel" data-accion="nivel-menos" aria-label="Nivel anterior">−</button>
+        <span class="nivel-txt">NIVEL <span id="nivel-num">1</span></span>
+        <button class="btn-nivel" data-accion="nivel-mas" aria-label="Nivel siguiente">+</button>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ================= FESTEJO ENTRE NIVELES ================= -->
+  <div id="capa-festejo" class="capa">
+    <div class="festejo-caja">
+      <h2 class="titulo-burbuja festejo-titulo"><span class="linea">¡MUY BIEN!</span></h2>
+      <div class="festejo-pareja" id="festejo-pareja"></div>
+      <div class="festejo-estrellas" id="festejo-estrellas"></div>
+      <div class="fila-botones">
+        <button class="btn-naranja btn-casa" data-accion="inicio" aria-label="Inicio">
+          <svg viewBox="0 0 64 64"><use href="#svg-casa"/></svg>
+        </button>
+        <button class="btn-verde btn-siguiente" data-accion="siguiente">
+          <span class="relleno" id="relleno-siguiente"></span>
+          <span class="txt">SIGUIENTE</span>
+          <svg viewBox="0 0 64 64" class="flecha"><use href="#svg-flecha"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAUSA ================= -->
+  <div id="capa-pausa" class="capa">
+    <div class="panel-madera">
+      <h2 class="titulo-burbuja"><span class="linea">PAUSA</span></h2>
+      <button class="btn-verde btn-ancho" data-accion="seguir">SEGUIR</button>
+      <button class="btn-celeste btn-ancho" data-accion="otra-vez">OTRA VEZ</button>
+      <button class="btn-naranja btn-ancho" data-accion="inicio">INICIO</button>
+      <button class="btn-redondo btn-sonido en-panel" data-accion="sonido" aria-label="Sonido">🔊</button>
+    </div>
+  </div>
+
+  <!-- ================= FIN DE PARTIDA ================= -->
+  <div id="capa-fin" class="capa">
+    <div class="panel-madera fin">
+      <h2 class="titulo-burbuja" id="fin-titulo"><span class="linea">¡BUEN JUEGO!</span></h2>
+      <div class="fin-trofeo" id="fin-trofeo">🏆</div>
+      <div class="fin-estrellas">
+        <svg viewBox="0 0 100 100" class="estrella-svg"><use href="#svg-estrella"/></svg>
+        <span id="fin-estrellas">0</span>
+      </div>
+      <div class="pildora-record chica"><span class="trofeo">🏆</span> RÉCORD <span id="fin-record">0</span></div>
+      <div class="fila-botones">
+        <button class="btn-naranja btn-casa" data-accion="inicio" aria-label="Inicio">
+          <svg viewBox="0 0 64 64"><use href="#svg-casa"/></svg>
+        </button>
+        <button class="btn-verde btn-siguiente" data-accion="otra-vez"><span class="txt">OTRA VEZ</span></button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confeti" aria-hidden="true"></canvas>
+
+  <!-- ================= ÍCONOS SVG ================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="g-estrella" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffe680"/><stop offset=".55" stop-color="#ffc21a"/><stop offset="1" stop-color="#f29a00"/>
+      </linearGradient>
+      <linearGradient id="g-corazon" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ff6b7a"/><stop offset="1" stop-color="#d9142e"/>
+      </linearGradient>
+      <linearGradient id="g-corazon-gris" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#eeeeee"/><stop offset="1" stop-color="#c4c4c4"/>
+      </linearGradient>
+      <symbol id="svg-estrella" viewBox="0 0 100 100">
+        <path d="M50 6 L62 36 L94 38 L69 59 L77 91 L50 73 L23 91 L31 59 L6 38 L38 36 Z"
+              fill="url(#g-estrella)" stroke="#e08a00" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M44 22 L50 10 L54 22" fill="none" stroke="#fff6c8" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+      </symbol>
+      <symbol id="svg-corazon" viewBox="0 0 100 90">
+        <path d="M50 86 C20 64 4 48 4 28 C4 14 15 4 28 4 C38 4 46 10 50 18 C54 10 62 4 72 4 C85 4 96 14 96 28 C96 48 80 64 50 86 Z"/>
+        <ellipse cx="28" cy="24" rx="11" ry="7" fill="#fff" opacity=".55" transform="rotate(-25 28 24)"/>
+      </symbol>
+      <symbol id="svg-casa" viewBox="0 0 64 64">
+        <path d="M32 8 L58 30 L50 30 L50 56 L38 56 L38 40 L26 40 L26 56 L14 56 L14 30 L6 30 Z"
+              fill="#fff" stroke="#c96a00" stroke-width="4" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="svg-flecha" viewBox="0 0 64 64">
+        <path d="M8 24 L34 24 L34 10 L58 32 L34 54 L34 40 L8 40 Z" fill="#fff" stroke="#2c8a1e" stroke-width="4" stroke-linejoin="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <script src="datos/palabras.js"></script>
+  <script src="js/sonidos.js"></script>
+  <script src="js/juego.js"></script>
+  <script>
+    try {
+      if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+        window.addEventListener('load', function () {
+          try { navigator.serviceWorker.register('sw.js').catch(function () {}); } catch (e) {}
+        });
+      }
+    } catch (e) {}
+  </script>
+</body>
+</html>
